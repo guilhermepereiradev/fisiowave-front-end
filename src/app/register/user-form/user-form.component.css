@@ -1,0 +1,25 @@
+.fields {
+    margin-bottom: 10px;
+    .flex {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+}
+
+.register {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    button {
+        background-color: #cecece;
+        font-size: 1.3em;
+    }
+}

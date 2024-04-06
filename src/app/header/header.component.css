@@ -1,0 +1,29 @@
+.header {
+    display: flex;
+    background-color: #00A693;
+    padding: 40px 10px;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+
+    button {
+        font-weight: 500;
+        font-size: 0.8em;
+    }
+
+    img {
+        height: 60px;
+        width: 60px;
+        cursor: pointer;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .header {
+        gap: 2px;
+
+        button {
+            font-size: 0.65em;
+        }
+    }
+}

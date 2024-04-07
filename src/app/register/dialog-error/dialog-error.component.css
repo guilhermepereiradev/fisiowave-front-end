@@ -1,0 +1,9 @@
+.content {
+    display: flex;
+    align-items: center;
+    padding: 30px;
+
+    span {
+        font-size: 1.2em;
+    }
+}

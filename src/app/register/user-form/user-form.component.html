@@ -2,48 +2,48 @@
     <div class="flex">
         <mat-form-field>
             <mat-label>Nome</mat-label>
-            <input matInput type="text" formControlName="name">
+            <input matInput type="text" formControlName="name" [(ngModel)]="this.currentUser.name">
         </mat-form-field>
 
         <mat-form-field>
             <mat-label>E-mail</mat-label>
-            <input matInput type="text" formControlName="email">
+            <input matInput type="text" formControlName="email" [(ngModel)]="this.currentUser.email">
         </mat-form-field>
 
         <mat-form-field>
             <mat-label>Bairro</mat-label>
-            <input matInput type="text" formControlName="neighborhood">
+            <input matInput type="text" formControlName="neighborhood" [(ngModel)]="this.currentUser.address.neighborhood">
         </mat-form-field>
     
         <mat-form-field>
             <mat-label>Rua</mat-label>
-            <input matInput type="text" formControlName="street">
+            <input matInput type="text" formControlName="street" [(ngModel)]="this.currentUser.address.street" >
         </mat-form-field>
     </div>
 
     <div class="grid">
         <mat-form-field>
             <mat-label>Telefone</mat-label>
-            <input matInput type="text" formControlName="phoneNumber">
+            <input matInput type="tel" formControlName="phoneNumber" [(ngModel)]="this.currentUser.phoneNumber">
         </mat-form-field>
 
         <mat-form-field>
             <mat-label>Número da residência</mat-label>
-            <input matInput type="text" formControlName="homeNumber">
+            <input matInput type="text" formControlName="homeNumber" [(ngModel)]="this.currentUser.address.homeNumber">
         </mat-form-field>
     
         <mat-form-field>
             <mat-label>CEP</mat-label>
-            <input matInput type="text" formControlName="zipCode">
+            <input matInput type="text" formControlName="zipCode" [(ngModel)]="this.currentUser.address.zipCode">
         </mat-form-field>
     
         <mat-form-field>
             <mat-label>Data de nacimento</mat-label>
-            <input matInput type="date" formControlName="birthDay">
+            <input matInput type="date" formControlName="birthDay" [(ngModel)]="this.currentUser.birthDay">
         </mat-form-field>
     </div>
 </div>
 
 <div class="register">
-    <button mat-button>Registrar</button>
+    <button mat-button (click)="register()">Registrar</button>
 </div>

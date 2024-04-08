@@ -1,49 +1,73 @@
-<div class="fields" [formGroup]="userForm">
+<form class="fields" [formGroup]="userForm" (ngSubmit)="register()">
     <div class="flex">
         <mat-form-field>
             <mat-label>Nome</mat-label>
-            <input matInput type="text" formControlName="name" [(ngModel)]="this.currentUser.name">
-        </mat-form-field>
-
-        <mat-form-field>
-            <mat-label>E-mail</mat-label>
-            <input matInput type="text" formControlName="email" [(ngModel)]="this.currentUser.email">
-        </mat-form-field>
-
-        <mat-form-field>
-            <mat-label>Bairro</mat-label>
-            <input matInput type="text" formControlName="neighborhood" [(ngModel)]="this.currentUser.address.neighborhood">
-        </mat-form-field>
-    
-        <mat-form-field>
-            <mat-label>Rua</mat-label>
-            <input matInput type="text" formControlName="street" [(ngModel)]="this.currentUser.address.street" >
+            <input matInput type="text" formControlName="name">
         </mat-form-field>
     </div>
-
     <div class="grid">
         <mat-form-field>
             <mat-label>Telefone</mat-label>
-            <input matInput type="tel" formControlName="phoneNumber" [(ngModel)]="this.currentUser.phoneNumber">
+            <input matInput type="tel" formControlName="phoneNumber">
         </mat-form-field>
-
         <mat-form-field>
-            <mat-label>Número da residência</mat-label>
-            <input matInput type="text" formControlName="homeNumber" [(ngModel)]="this.currentUser.address.homeNumber">
-        </mat-form-field>
-    
-        <mat-form-field>
-            <mat-label>CEP</mat-label>
-            <input matInput type="text" formControlName="zipCode" [(ngModel)]="this.currentUser.address.zipCode">
-        </mat-form-field>
-    
-        <mat-form-field>
-            <mat-label>Data de nacimento</mat-label>
-            <input matInput type="date" formControlName="birthDay" [(ngModel)]="this.currentUser.birthDay">
+            <mat-label>Data de nascimento</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="birthDate">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
     </div>
-</div>
-
-<div class="register">
-    <button mat-button (click)="register()">Registrar</button>
-</div>
+    <div class="flex">
+        <mat-form-field>
+            <mat-label>E-mail</mat-label>
+            <input matInput type="text" formControlName="email">
+        </mat-form-field>
+    </div>
+    <div class="grid">
+        <mat-form-field>
+            <mat-label>CEP</mat-label>
+            <input matInput type="text" formControlName="zipCode">
+        </mat-form-field>
+    </div>
+    <div class="flex">
+        <mat-form-field>
+            <mat-label>Rua</mat-label>
+            <input matInput type="text" formControlName="street">
+        </mat-form-field>
+    </div>
+    <div class="grid">
+        <mat-form-field>
+            <mat-label>Número da residência</mat-label>
+            <input matInput type="text" formControlName="number">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Complemento</mat-label>
+            <input matInput type="text" formControlName="complement">
+        </mat-form-field>
+    </div>
+    <div class="flex">
+        <mat-form-field>
+            <mat-label>Bairro</mat-label>
+            <input matInput type="text" formControlName="neighborhood">
+        </mat-form-field>
+    </div>
+    <div class="grid">
+        <mat-form-field>
+            <mat-label>Estado</mat-label>
+            <mat-select matInput type="text" formControlName="state">
+                <mat-option value="Minas Gerais">Minas Gerais</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Cidade</mat-label>
+            <mat-select matInput type="text" formControlName="city">
+                @for (city of cities; track cities) {
+                    <mat-option value="{{ city.id }}">{{ city.name }}</mat-option>
+                  }
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="register">
+        <button mat-button type="submit">Registrar</button>
+    </div>
+</form>

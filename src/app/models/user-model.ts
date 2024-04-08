@@ -1,28 +1,62 @@
-class Address {
-    neighborhood: string;
-    street: string;
-    homeNumber: string;
+export class AddressRequest {
     zipCode: string;
+    street: string;
+    number: string;
+    neighborhood: string;
+    complement: string;
+    city: CityIdRequest;
 
-    constructor(){
-        this.neighborhood = "";
-        this.street = "";
-        this.homeNumber = "";
-        this.zipCode = "";
+    constructor(zipCode: string, street: string, number: string, neighborhood: string, complement: string, city: CityIdRequest){
+        this.zipCode = zipCode;
+        this.street = street;
+        this.number = number;
+        this.neighborhood = neighborhood;
+        this.complement = complement;
+        this.city = city;
     }
 }
 
-export class User {
+export class City {
+    id?: string;
+    name: string;
+    state: State;
+
+    constructor(name: string, state: State){
+        this.name = name;
+        this.state = state;
+    }
+}
+
+export class CityIdRequest {
+    id?: string;
+
+    constructor(id: string) {
+        this.id = id;
+    }
+}
+
+export class State {
+    id?: string;
+    name: string;
+    acronym: string;
+
+    constructor(name: string, acronym: string){
+        this.name = name;
+        this.acronym = acronym;
+    }
+}
+
+export class UserRequest {
     name: string;
     phoneNumber: string;
-    birthDay: string;
+    birthDate: string;
     email: string;
-    address = new Address();
+    address?: AddressRequest;
 
-    constructor() {
-        this.name = "";
-        this.phoneNumber = "";
-        this.birthDay = "";
-        this.email = "";
+    constructor(name: string, phoneNumber: string, birthDate: string, email: string) {
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.birthDate = birthDate;
+        this.email = email;
     }
 }

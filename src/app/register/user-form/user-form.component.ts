@@ -38,8 +38,6 @@ export class UserFormComponent implements OnInit{;
     })
 
     this.cities?.map(city => this.citiesNameList?.push(city.name));
-
-    console.log(this.citiesNameList)
   }
 
 

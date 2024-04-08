@@ -12,6 +12,7 @@ import { AddressRequest, City, CityIdRequest, UserRequest } from '../../models/u
 import { DialogConnectionErrorComponent } from '../dialog-connection-error/dialog-connection-error.component';
 import { PatientService } from '../services/patient.service';
 import { CityService } from '../services/city.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-form',
@@ -26,7 +27,8 @@ export class UserFormComponent implements OnInit{;
     private dialog: MatDialog,
     private patientService: PatientService,
     private cityService: CityService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) {}
 
   cities?: City[];
@@ -71,6 +73,7 @@ export class UserFormComponent implements OnInit{;
 
       this.patientService.createPatient(newUser).subscribe({
         next: () => {
+          this.router.navigateByUrl("");
           this.dialog.open(DialogSuccessComponent);
         },
         error: () => {

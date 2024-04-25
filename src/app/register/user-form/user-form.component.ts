@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatFormField, MatFormFieldModule, MatLabel } from '@angular/material/form-field';
-import { MatInput, MatInputModule, } from '@angular/material/input'
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import { MatSelect, MatOption } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule, } from '@angular/material/input'
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatSelectModule } from '@angular/material/select';
 import { MatButton } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog'
 import { DialogErrorComponent } from '../dialog-error/dialog-error.component';
@@ -17,7 +17,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-user-form',
   standalone: true,
-  imports: [ReactiveFormsModule, MatFormField, MatLabel, MatInput, MatSelect, MatOption, MatButton, MatFormFieldModule, MatInputModule, MatDatepickerModule],
+  imports: [ReactiveFormsModule, MatSelectModule, MatButton, MatFormFieldModule, MatInputModule, MatDatepickerModule],
   templateUrl: './user-form.component.html',
   styleUrl: './user-form.component.css'
 })

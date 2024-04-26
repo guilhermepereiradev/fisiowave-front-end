@@ -6,10 +6,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButton } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog'
-import { DialogErrorComponent } from '../dialog-error/dialog-error.component';
-import { DialogSuccessComponent } from '../dialog-success/dialog-success.component';
+import { RequestDialogComponent } from '../request-dialog/request-dialog.component';
 import { AddressRequest, City, CityIdRequest, UserRequest } from '../../models/user-model';
-import { DialogConnectionErrorComponent } from '../dialog-connection-error/dialog-connection-error.component';
 import { PatientService } from '../services/patient.service';
 import { CityService } from '../services/city.service';
 import { Router } from '@angular/router';
@@ -63,7 +61,11 @@ export class UserFormComponent implements OnInit{;
     
     if (!isFormValid) {
       this.userForm.markAllAsTouched();
-      this.dialog.open(DialogErrorComponent);
+      this.dialog.open(RequestDialogComponent, {
+        data: {
+          message: "Preencha todos os campos obrigatórios corretamente"
+        }
+      });
     } else {    
       let userData = this.userForm.value;
       
@@ -74,10 +76,20 @@ export class UserFormComponent implements OnInit{;
       this.patientService.createPatient(newUser).subscribe({
         next: () => {
           this.router.navigateByUrl("");
-          this.dialog.open(DialogSuccessComponent);
+          this.dialog.open(RequestDialogComponent, {
+            data: {
+              message: "Usuário registrado com sucesso!"
+            }
+          });
         },
-        error: () => {
-          this.dialog.open(DialogConnectionErrorComponent);
+        error: (res) => {
+          const message = res.error.message ?? "Erro no servidor";
+
+          this.dialog.open(RequestDialogComponent, {
+            data: {
+              message: message
+            }
+          });
         }
       });
     }

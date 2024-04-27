@@ -75,7 +75,7 @@ export class UserFormComponent implements OnInit{;
 
       this.patientService.createPatient(newUser).subscribe({
         next: () => {
-          this.router.navigateByUrl("");
+          this.router.navigateByUrl("/dashboard");
           this.dialog.open(RequestDialogComponent, {
             data: {
               message: "Usuário registrado com sucesso!"

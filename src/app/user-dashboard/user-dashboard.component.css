@@ -1,0 +1,26 @@
+.content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 30px;
+    height: 100%;
+    gap: 10vw;
+
+    mat-card-header {
+        background-color: #acacac;
+        margin-bottom: 15px;
+    }
+
+    .left-side {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .right-side {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        gap: 5vh;
+        height: 100%;
+    }
+}

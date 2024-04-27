@@ -31,7 +31,13 @@
         </mat-form-field>
     </div>
 
-    <div class="flex">
+    <div class="grid">
+        <mat-form-field>
+            <mat-label>Senha</mat-label>
+            <input matInput type="password" formControlName="password">
+            <mat-error>Senha obrigatória</mat-error>
+        </mat-form-field>
+
         <mat-form-field>
             <mat-label>CEP</mat-label>
             <input matInput type="text" formControlName="zipCode">

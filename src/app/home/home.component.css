@@ -19,6 +19,12 @@
         mat-card-content {
             font-size: 1.2em;
             font-family: "Open Sans", sans-serif;
+            
+            button {
+                background-color: #1a73e8;
+                color: white;
+                padding: 10px;
+            }
         }
     }
 }

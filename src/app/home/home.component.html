@@ -1,20 +1,50 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+  rel="stylesheet">
 
 <div class="content">
-    <mat-card class="card">
-        <mat-card-header>
-          <mat-card-title>FisioWave</mat-card-title>
-          <mat-card-subtitle>Bem vindo ao FisioWave!</mat-card-subtitle>
-        </mat-card-header>
+  <div class="welcome">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>FisioWave</mat-card-title>
+        <mat-card-subtitle>Bem vindo ao FisioWave!</mat-card-subtitle>
+      </mat-card-header>
 
-        <mat-card-content>
-          <p>Software auxiliar do tratamento de pacientes em fisioterapia.</p>
-          <button mat-raised-button routerLink="login">
-            <mat-icon>login</mat-icon>
-            <span>Login</span>
-          </button>
-        </mat-card-content>
+      <mat-card-content>
+        <p>Software auxiliar do tratamento de pacientes em fisioterapia.</p>
+      </mat-card-content>
     </mat-card>
+  </div>
+
+  <div class="actions">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Ainda não sou paciente</mat-card-title>
+        <mat-card-subtitle>Conheça o que temos a oferecer e realize um cadastro</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <button mat-raised-button routerLink="register">
+          <mat-icon>app_registration</mat-icon>
+          <span>Cadastrar</span>
+        </button>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Já sou paciente</mat-card-title>
+        <mat-card-subtitle>Faça o login para acessar a área de usuário</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <button mat-raised-button routerLink="login">
+          <mat-icon>login</mat-icon>
+          <span>Login</span>
+        </button>
+      </mat-card-content>
+    </mat-card>
+
+  </div>
 </div>

@@ -1,6 +1,13 @@
 <mat-toolbar class="header">
-    <img src="../../assets/logo.png" routerLink="/" alt="fisiowave logo">
-    <button mat-button routerLink="/">Início</button>
-    <button mat-button routerLink="register">Cadastrar</button>
-    <button mat-button routerLink="dashboard">Dashboard</button>
+    <div class="left">
+        <img src="../../assets/logo.png" routerLink="/" alt="fisiowave logo">
+        <span>FisioWave</span>
+    </div>
+
+    <div class="right">
+        <button mat-button routerLink="/">
+            <mat-icon>reply</mat-icon>
+            <span>Voltar ao início</span>
+        </button>
+    </div>
 </mat-toolbar>

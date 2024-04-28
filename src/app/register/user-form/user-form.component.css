@@ -9,6 +9,12 @@
         grid-template-columns: repeat(2, 1fr);
         gap: 10px;
     }
+
+    .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
 }
 
 .register {

@@ -22,7 +22,15 @@
 
         <mat-form-field>
             <mat-label>Confirmar Senha</mat-label>
-            <input matInput type="password">
+            <input matInput type="password" formControlName="confirmPassword">
+            <mat-error>
+                @if (userForm.get('confirmPassword')?.hasError('required') && userForm.get('confirmPassword')?.touched) {
+                    Confirmar senha obrigatória
+                }
+                @else if(userForm.get('confirmPassword')?.hasError('mismatch') && userForm.get('confirmPassword')?.touched) {
+                    As duas senhas devem ser iguais
+                }
+            </mat-error>
         </mat-form-field>
     </div>
 

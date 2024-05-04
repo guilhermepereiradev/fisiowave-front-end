@@ -48,15 +48,27 @@ export class State {
 
 export class UserRequest {
     name: string;
+    password: string;
     phoneNumber: string;
     birthDate: string;
     email: string;
     address?: AddressRequest;
 
-    constructor(name: string, phoneNumber: string, birthDate: string, email: string) {
+    constructor(name: string, password: string, phoneNumber: string, birthDate: string, email: string) {
         this.name = name;
+        this.password = password;
         this.phoneNumber = phoneNumber;
         this.birthDate = birthDate;
         this.email = email;
+    }
+}
+
+export class UserLoginRequest {
+    email: string;
+    password: string;
+
+    constructor(email: string, password: string) {
+        this.email = email;
+        this.password = password;
     }
 }

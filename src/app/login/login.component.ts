@@ -6,6 +6,11 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButton } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { PatientService } from '../register/services/patient.service';
+import { UserLoginRequest } from '../models/user-model';
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { RequestDialogComponent } from '../register/request-dialog/request-dialog.component';
 
 @Component({
   selector: 'app-login',
@@ -14,10 +19,12 @@ import { MatCardModule } from '@angular/material/card';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent {;
-
+export class LoginComponent {
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private patientService: PatientService,
+    private router: Router,
+    private dialog: MatDialog
   ) {}
 
   userForm: FormGroup = this.fb.group({
@@ -26,5 +33,23 @@ export class LoginComponent {;
   })
 
   login(): void {
+    let userData = this.userForm.value;
+    let loginUser = new UserLoginRequest(userData.email, userData.password);
+    
+    this.patientService.loginPatient(loginUser).subscribe({
+      next: (res: any) => {
+        localStorage.setItem("loginToken", res.accessToken)
+        this.router.navigateByUrl("/dashboard");
+      },
+      error: (res) => {
+        const message = res.error.message ?? "Erro no servidor";
+
+        this.dialog.open(RequestDialogComponent, {
+          data: {
+            message: message
+          }
+        });
+      }
+    });
   }
 }

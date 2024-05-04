@@ -93,13 +93,12 @@ export class UserFormComponent implements OnInit {
     } else {
       let userData = this.userForm.value;
 
-      let newUser = new UserRequest(userData.name, userData.phoneNumber, userData.birthDate, userData.email);
+      let newUser = new UserRequest(userData.name, userData.password, userData.phoneNumber, userData.birthDate, userData.email);
       newUser.address = new AddressRequest(userData.zipCode, userData.street, userData.number, userData.neighborhood, userData.complement, new CityIdRequest(userData.city))
-
 
       this.patientService.createPatient(newUser).subscribe({
         next: () => {
-          this.router.navigateByUrl("/dashboard");
+          this.router.navigateByUrl("/");
           this.dialog.open(RequestDialogComponent, {
             data: {
               message: "Usuário registrado com sucesso!"

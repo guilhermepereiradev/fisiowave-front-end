@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable, InjectionToken, PLATFORM_ID } from '@angular/core';
-import { UserLoginRequest, UserRequest } from '../../models/user-model';
+import { PatientInterface, UserLoginRequest, UserRequest } from '../../models/user-model';
 import { BASE_URL } from '../../config/constants.config';
 import { Observable } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
@@ -11,6 +11,7 @@ import { jwtDecode } from "jwt-decode";
 })
 export class PatientService {
   isBrowser: boolean;
+  currentPatient?: PatientInterface;
 
   constructor(
     private httpClient: HttpClient,
@@ -34,7 +35,13 @@ export class PatientService {
 
     if (currentUserToken) {
       let decodedToken = jwtDecode(currentUserToken);
-      console.log(decodedToken.sub);
+      this.httpClient.get<PatientInterface>(`${BASE_URL}/patients/${decodedToken.sub}`)
+        .subscribe(data => this.currentPatient = data)
+      
+      console.log(this.currentPatient);
+    }
+    else {
+      return undefined;
     }
   }
 }

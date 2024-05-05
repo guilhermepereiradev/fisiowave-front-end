@@ -72,3 +72,45 @@ export class UserLoginRequest {
         this.password = password;
     }
 }
+
+export interface PatientInterface {
+    id: string;
+    name: string;
+    phoneNumber: string;
+    birthDate: string;
+    email: string;
+    createdAt: string;
+    updateAt: string;
+    address: {
+      zipCode: string;
+      street: string;
+      number: string;
+      complement: string;
+      neighborhood: string;
+      city: {
+        id: string;
+        name: string;
+        state: {
+          id: string;
+          name: string;
+          acronym: string;
+        };
+      };
+    };
+    appointments: {
+      id: string;
+      time: string;
+      patient: {
+        id: string;
+        name: string;
+        phoneNumber: string;
+        birthDate: string;
+        email: string;
+      };
+      physiotherapist: {
+        id: string;
+        name: string;
+        email: string;
+      };
+    }[];
+}

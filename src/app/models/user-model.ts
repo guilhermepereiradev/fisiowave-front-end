@@ -73,44 +73,95 @@ export class UserLoginRequest {
     }
 }
 
-export interface PatientInterface {
+export class AddressResponse {
+    zipCode: string;
+    street: string;
+    number: string;
+    neighborhood: string;
+    complement: string;
+    city: CityResponse;
+
+    constructor(zipCode: string, street: string, number: string, neighborhood: string, complement: string, city: CityResponse){
+        this.zipCode = zipCode;
+        this.street = street;
+        this.number = number;
+        this.neighborhood = neighborhood;
+        this.complement = complement;
+        this.city = city;
+    }
+}
+
+export class CityResponse {
+    id: string;
+    name: string;
+    state: StateResponse;
+
+    constructor(id: string, name: string, state: StateResponse) {
+        this.id = id;
+        this.name = name;
+        this.state = state;
+    }
+}
+
+export class AppointmentsResponse {
+    id: string;
+    time: Date;
+    physiotherapist: PhysiotherapistResponse;
+
+    constructor(id: string, time: Date, physiotherapist: PhysiotherapistResponse) {
+        this.id = id;
+        this.time = time;
+        this.physiotherapist = physiotherapist;
+    }
+}
+
+export class PhysiotherapistResponse {
+    id: string;
+    name: string;
+    email: string;
+
+    constructor(id: string, name: string, email: string) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+    }
+}
+
+export class StateResponse {
+    id: string;
+    name: string;
+    acronym: string
+
+    constructor(id: string, name: string, acronym: string) {
+        this.id = id;
+        this.name = name;
+        this.acronym = acronym;
+    }
+}
+
+
+export class PatientResponse {
     id: string;
     name: string;
     phoneNumber: string;
     birthDate: string;
     email: string;
-    createdAt: string;
-    updateAt: string;
-    address: {
-      zipCode: string;
-      street: string;
-      number: string;
-      complement: string;
-      neighborhood: string;
-      city: {
-        id: string;
-        name: string;
-        state: {
-          id: string;
-          name: string;
-          acronym: string;
-        };
-      };
-    };
-    appointments: {
-      id: string;
-      time: string;
-      patient: {
-        id: string;
-        name: string;
-        phoneNumber: string;
-        birthDate: string;
-        email: string;
-      };
-      physiotherapist: {
-        id: string;
-        name: string;
-        email: string;
-      };
-    }[];
+    createdAt: Date;
+    updateAt: Date;
+    address: AddressResponse;
+    appointments: AppointmentsResponse[];
+
+    constructor(id: string, name: string, phoneNumber: string, birthDate: string, email: string, createdAt: Date,
+        updatedAt: Date, address: AddressResponse, appointments: AppointmentsResponse[] )
+    {
+        this.id = id;
+        this.name = name;
+        this.phoneNumber = phoneNumber,
+        this.birthDate = birthDate,
+        this.email = email,
+        this.createdAt = createdAt,
+        this.updateAt = updatedAt,
+        this.address = address,
+        this.appointments = appointments
+    }
 }

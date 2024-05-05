@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { PatientService } from '../register/services/patient.service';
-import { UserRequest } from '../models/user-model';
+import { PatientResponse, UserRequest } from '../models/user-model';
 import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -12,12 +13,23 @@ import { Observable } from 'rxjs';
   styleUrl: './user-dashboard.component.css'
 })
 export class UserDashboardComponent implements OnInit {
+  currentPatient?: PatientResponse
+
   constructor(
-    private patientService: PatientService
+    private patientService: PatientService,
+    private activatedRoute: ActivatedRoute
   )
   {}
 
   ngOnInit(): void {
-    this.patientService.getCurrentPatient();
+    let id = this.activatedRoute.snapshot.params[ "id" ];
+
+    this.patientService.getPatientById(id).subscribe(
+      {
+        next: (res) => {
+          this.currentPatient = res;
+        }
+      }
+    );
   }
 }

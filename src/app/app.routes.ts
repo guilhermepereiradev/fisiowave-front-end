@@ -7,7 +7,7 @@ import { LoginComponent } from './login/login.component';
 export const routes: Routes = [
     { path: "", title: "FisioWave - Home", component: HomeComponent },
     { path: "register", title: "FisioWave - Cadastrar", component: RegisterComponent },
-    { path: "dashboard", title: "FisioWave - Dashboard", component: UserDashboardComponent },
+    { path: "dashboard/:id", title: "FisioWave - Dashboard", component: UserDashboardComponent },
     { path: "login", title: "FisioWave - Login", component: LoginComponent },
     { path: "**", redirectTo: "" },
 ];

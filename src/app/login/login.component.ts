@@ -6,11 +6,12 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButton } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { PatientService } from '../register/services/patient.service';
 import { UserLoginRequest } from '../models/user-model';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { RequestDialogComponent } from '../register/request-dialog/request-dialog.component';
+import { LoginService } from './services/login.service';
+import { jwtDecode } from "jwt-decode";
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,7 @@ import { RequestDialogComponent } from '../register/request-dialog/request-dialo
 export class LoginComponent {
   constructor(
     private fb: FormBuilder,
-    private patientService: PatientService,
+    private loginService: LoginService,
     private router: Router,
     private dialog: MatDialog
   ) {}
@@ -36,10 +37,11 @@ export class LoginComponent {
     let userData = this.userForm.value;
     let loginUser = new UserLoginRequest(userData.email, userData.password);
     
-    this.patientService.loginPatient(loginUser).subscribe({
+    this.loginService.login(loginUser).subscribe({
       next: (res: any) => {
         localStorage.setItem("loginToken", res.accessToken)
-        this.router.navigateByUrl("/dashboard");
+        let decodedToken = jwtDecode(res.accessToken)
+        this.router.navigate(["dashboard/", decodedToken.sub]);
       },
       error: (res) => {
         const message = res.error.message ?? "Erro no servidor";

@@ -5,6 +5,12 @@
     padding: 40px 10px;
     width: 100%;
 
+    .right {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
     .left {
         display: flex;
         flex-direction: row;
@@ -28,7 +34,6 @@
     img {
         height: 60px;
         width: 60px;
-        cursor: pointer;
     }
 }
 

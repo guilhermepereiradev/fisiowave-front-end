@@ -1,35 +1,54 @@
 <div class="content">
-    <div class="left-side">
-        <mat-card class="card">
-            <mat-card-header>
-              <mat-card-title>Meus dados</mat-card-title>
-            </mat-card-header>
-    
-            <mat-card-content>
-             <span>{{currentPatient?.name}}</span>
-            </mat-card-content>
-        </mat-card>
-    </div>
+  <div class="left-side">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Meus dados</mat-card-title>
+      </mat-card-header>
 
-    <div class="right-side">
-        <mat-card class="card">
-            <mat-card-header>
-              <mat-card-title>Marcar sessão</mat-card-title>
-            </mat-card-header>
-    
-            <mat-card-content>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet, labore? Necessitatibus, enim quisquam corrupti atque a, architecto dolorem sint deserunt voluptatem veritatis ullam voluptatum dolore quibusdam reprehenderit laudantium quos ab.</p>
-            </mat-card-content>
-        </mat-card>
+      <mat-card-content>
+        <div class="user-info-list">
+          <div class="user-info">
+            <b>Nome: </b>
+            <span>{{currentPatient?.name}}</span>
+          </div>
 
-        <mat-card class="card">
-            <mat-card-header>
-              <mat-card-title>Histórico de sessões</mat-card-title>
-            </mat-card-header>
-    
-            <mat-card-content>
-              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nam minima debitis nobis ullam quod ipsum commodi tempora. Soluta molestias repellendus incidunt unde illo sint sapiente iusto nobis! Aspernatur, suscipit ratione.</p>
-            </mat-card-content>
-        </mat-card>
-    </div>
+          <div class="user-info">
+            <b>Email: </b>
+            <span>{{currentPatient?.email}}</span>
+          </div>
+
+          <div class="user-info">
+            <b>Telefone </b>
+            <span>{{formatedPhoneNumber}}</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="right-side">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Marcar sessão</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet, labore? Necessitatibus, enim quisquam
+          corrupti atque a, architecto dolorem sint deserunt voluptatem veritatis ullam voluptatum dolore quibusdam
+          reprehenderit laudantium quos ab.</p>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Histórico de sessões</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nam minima debitis nobis ullam quod ipsum commodi
+          tempora. Soluta molestias repellendus incidunt unde illo sint sapiente iusto nobis! Aspernatur, suscipit
+          ratione.</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>

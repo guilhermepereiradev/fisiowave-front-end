@@ -30,6 +30,12 @@
         justify-content: space-around;
         gap: 50px;
 
+        mat-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
         mat-card-title {
             font-size: 1.5em;
         }

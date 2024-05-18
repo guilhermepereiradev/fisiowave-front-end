@@ -4,7 +4,7 @@
     align-items: center;
     
     mat-card {
-        min-width: 25%;
+        width: 350px;
         min-height: 40%;
 
         mat-card-title {

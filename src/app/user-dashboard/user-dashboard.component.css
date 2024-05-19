@@ -1,9 +1,16 @@
 .content {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    height: 100%;
-    gap: 10vw;
+    justify-content: space-around;
+    gap: 10px;
+
+    span {
+        font-size: 1.1em;
+    }
+
+    b {
+        font-size: 1.2em;
+    }
 
     mat-card-header {
         background-color: #acacac;
@@ -13,13 +20,12 @@
     .left-side {
         display: flex;
         flex-direction: column;
-        width: 30%;
+        min-width: 350px;
 
         .user-info-list {
             display: flex;
             flex-direction: column;
             gap: 10px;
-            width: 100%;
 
             span {
                 text-overflow: ellipsis;
@@ -45,8 +51,42 @@
     .right-side {
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
-        gap: 5vh;
-        height: 100%;
+        gap: 50px;
+        max-width: 500px;
+        
+        .book-appointment {
+            mat-card-content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                .fields {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 5px;
+                }
+
+                .book-appointment-btn {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 100%;
+                    margin-top: 10px;
+    
+                    button {
+                        font-size: 1.3em;
+                        background-color: #1a73e8;
+                        color: white;
+                        padding: 20px;
+                    }
+                }
+            }
+        }
+
+        .appointments {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
     }
 }

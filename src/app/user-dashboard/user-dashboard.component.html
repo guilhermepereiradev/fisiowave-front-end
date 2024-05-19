@@ -9,16 +9,16 @@
         <div class="user-info-list">
           <div class="user-info">
             <b>Nome: </b>
-            <span>{{currentPatient?.name}}</span>
+            <span>{{currentPatient.name}}</span>
           </div>
 
           <div class="user-info">
             <b>Email: </b>
-            <span>{{currentPatient?.email}}</span>
+            <span>{{currentPatient.email}}</span>
           </div>
 
           <div class="user-info">
-            <b>Telefone </b>
+            <b>Telefone: </b>
             <span>{{formatedPhoneNumber}}</span>
           </div>
         </div>
@@ -27,27 +27,70 @@
   </div>
 
   <div class="right-side">
-    <mat-card>
+    <mat-card class="book-appointment">
       <mat-card-header>
         <mat-card-title>Marcar sessão</mat-card-title>
       </mat-card-header>
 
       <mat-card-content>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet, labore? Necessitatibus, enim quisquam
-          corrupti atque a, architecto dolorem sint deserunt voluptatem veritatis ullam voluptatum dolore quibusdam
-          reprehenderit laudantium quos ab.</p>
+        @if (allPhysiotherapists) {
+          <form class="fields" [formGroup]="appointmentForm" (ngSubmit)="bookAppointment()">
+            <mat-form-field>
+              <mat-label>Data</mat-label>
+              <input matInput [matDatepicker]="picker" formControlName="time">
+              <mat-error>Data inválida</mat-error>
+              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+  
+            <mat-form-field>
+              <mat-label>Fisioterapeuta</mat-label>
+              <mat-select matInput type="text" formControlName="physiotherapistId">
+                @for (physiotherapist of allPhysiotherapists; track allPhysiotherapists) {
+                <mat-option value="{{ physiotherapist.id }}">{{ physiotherapist.name }}</mat-option>
+                }
+              </mat-select>
+              <mat-error>Fisioterapeuta inválido</mat-error>
+            </mat-form-field>
+
+            <div class="book-appointment-btn">
+              <button mat-button type="submit">Marcar sessão</button>
+            </div>
+          </form>
+        }
+        @else {
+          <span>Nenhum fisioterapeuta disponível para marcar sessão.</span>
+        }
+        
       </mat-card-content>
     </mat-card>
 
     <mat-card>
       <mat-card-header>
-        <mat-card-title>Histórico de sessões</mat-card-title>
+        <mat-card-title>Sessões marcadas</mat-card-title>
       </mat-card-header>
 
       <mat-card-content>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nam minima debitis nobis ullam quod ipsum commodi
-          tempora. Soluta molestias repellendus incidunt unde illo sint sapiente iusto nobis! Aspernatur, suscipit
-          ratione.</p>
+        @if (currentPatient.appointments.length <= 0) {
+          <span>Nenhuma sessão marcada</span>
+        }
+        @else {
+          <div class="appointments">
+            @for (appointment of currentPatient.appointments; track appointment) {
+              <div>
+                <div>
+                  <b>Data/hora: </b>
+                  <span> {{formatDate(appointment.time)}}</span>
+                </div>
+  
+                <div>
+                  <b>Fisioterapeuta: </b>
+                  <span> {{appointment.physiotherapist.name}}</span>
+                </div>
+              </div>
+            }
+          </div>
+        }
       </mat-card-content>
     </mat-card>
   </div>

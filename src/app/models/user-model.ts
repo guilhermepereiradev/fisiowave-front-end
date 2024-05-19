@@ -6,7 +6,7 @@ export class AddressRequest {
     complement: string;
     city: CityIdRequest;
 
-    constructor(zipCode: string, street: string, number: string, neighborhood: string, complement: string, city: CityIdRequest){
+    constructor(zipCode: string, street: string, number: string, neighborhood: string, complement: string, city: CityIdRequest) {
         this.zipCode = zipCode;
         this.street = street;
         this.number = number;
@@ -21,9 +21,21 @@ export class City {
     name: string;
     state: State;
 
-    constructor(name: string, state: State){
+    constructor(name: string, state: State) {
         this.name = name;
         this.state = state;
+    }
+}
+
+export class Physiotherapist {
+    id: string;
+    name: string;
+    email: string;
+
+    constructor(id: string, name: string, email: string) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
     }
 }
 
@@ -40,7 +52,7 @@ export class State {
     name: string;
     acronym: string;
 
-    constructor(name: string, acronym: string){
+    constructor(name: string, acronym: string) {
         this.name = name;
         this.acronym = acronym;
     }
@@ -73,6 +85,18 @@ export class UserLoginRequest {
     }
 }
 
+export class AppointmentRequest {
+    time: Date;
+    patientId: string;
+    physiotherapistId: string;
+    
+    constructor(time: Date, patientId: string, physiotherapistId: string) {
+        this.time = time;
+        this.patientId = patientId;
+        this.physiotherapistId = physiotherapistId;
+    }
+}
+
 export class AddressResponse {
     zipCode: string;
     street: string;
@@ -81,7 +105,7 @@ export class AddressResponse {
     complement: string;
     city: CityResponse;
 
-    constructor(zipCode: string, street: string, number: string, neighborhood: string, complement: string, city: CityResponse){
+    constructor(zipCode: string, street: string, number: string, neighborhood: string, complement: string, city: CityResponse) {
         this.zipCode = zipCode;
         this.street = street;
         this.number = number;
@@ -152,16 +176,15 @@ export class PatientResponse {
     appointments: AppointmentsResponse[];
 
     constructor(id: string, name: string, phoneNumber: string, birthDate: string, email: string, createdAt: Date,
-        updatedAt: Date, address: AddressResponse, appointments: AppointmentsResponse[] )
-    {
+        updatedAt: Date, address: AddressResponse, appointments: AppointmentsResponse[]) {
         this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber,
-        this.birthDate = birthDate,
-        this.email = email,
-        this.createdAt = createdAt,
-        this.updateAt = updatedAt,
-        this.address = address,
-        this.appointments = appointments
+            this.birthDate = birthDate,
+            this.email = email,
+            this.createdAt = createdAt,
+            this.updateAt = updatedAt,
+            this.address = address,
+            this.appointments = appointments
     }
 }

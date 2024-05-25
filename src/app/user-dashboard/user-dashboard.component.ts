@@ -22,13 +22,15 @@ import { DatePipe } from '@angular/common';
   providers: [DatePipe]
 })
 export class UserDashboardComponent implements OnInit {
-  currentPatient!: PatientResponse
+  currentPatient?: PatientResponse
   allPhysiotherapists?: Physiotherapist[];
+  allAvailableTimes: string[] = [];
 
   appointmentForm: FormGroup = this.fb.group({
-    time: ["", Validators.required],
+    date: ["", Validators.required],
     patientId: ["", Validators.required],
-    physiotherapistId: ["", Validators.required]
+    physiotherapistId: ["", Validators.required],
+    time: ["", Validators.required]
   })
 
   get formatedPhoneNumber(): string {
@@ -62,12 +64,40 @@ export class UserDashboardComponent implements OnInit {
         }
       }
     )
+
+    this.appointmentForm.valueChanges.subscribe(() => {
+      let appointmentData = this.appointmentForm.value;
+
+      if (appointmentData.physiotherapistId && appointmentData.date) this.updateAvailableTimes()
+    });
+  }
+
+  updateAvailableTimes(): void {
+    let appointmentData = this.appointmentForm.value;
+
+    this.physiotherapistsService.getAvailableTime(appointmentData.physiotherapistId, this.formatTimeRequestDate(appointmentData.date)).subscribe({
+      next: (res) => {
+        this.allAvailableTimes = res;
+      },
+      error: (res) => {
+        const message = res.error.message ?? "Erro no servidor";
+
+        this.dialog.open(RequestDialogComponent, {
+          data: {
+            message: message
+          }
+        })
+      }
+    })
   }
 
   bookAppointment(): void {
-    let appointmentData = this.appointmentForm.value;
+    if (!this.currentPatient) return;
 
-    let newAppointment = new AppointmentRequest(appointmentData.time, this.currentPatient?.id, appointmentData.physiotherapistId);
+    let appointmentData = this.appointmentForm.value;
+    let appointmentDate = new Date(appointmentData.time);
+
+    let newAppointment = new AppointmentRequest(appointmentDate, this.currentPatient.id, appointmentData.physiotherapistId);
 
     this.physiotherapistsService.createAppointment(newAppointment).subscribe({
       next: () => {
@@ -105,5 +135,15 @@ export class UserDashboardComponent implements OnInit {
 
   formatDate(date: Date): string {
     return this.datePipe.transform(date, 'dd/MM/yyyy HH:mm') || '';
+  }
+
+  formatTimeRequestDate(date: Date): string {
+    return this.datePipe.transform(date, 'yyyy-MM-dd') || '';
+  }
+
+  formatTime(dateString: string): string {
+    const date = new Date(dateString);
+
+    return this.datePipe.transform(date, 'HH:mm') || '';
   }
 }

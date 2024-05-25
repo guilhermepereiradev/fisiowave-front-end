@@ -9,12 +9,12 @@
         <div class="user-info-list">
           <div class="user-info">
             <b>Nome: </b>
-            <span>{{currentPatient.name}}</span>
+            <span>{{currentPatient?.name}}</span>
           </div>
 
           <div class="user-info">
             <b>Email: </b>
-            <span>{{currentPatient.email}}</span>
+            <span>{{currentPatient?.email}}</span>
           </div>
 
           <div class="user-info">
@@ -37,7 +37,7 @@
           <form class="fields" [formGroup]="appointmentForm" (ngSubmit)="bookAppointment()">
             <mat-form-field>
               <mat-label>Data</mat-label>
-              <input matInput [matDatepicker]="picker" formControlName="time">
+              <input matInput [matDatepicker]="picker" formControlName="date">
               <mat-error>Data inválida</mat-error>
               <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
@@ -53,9 +53,38 @@
               <mat-error>Fisioterapeuta inválido</mat-error>
             </mat-form-field>
 
-            <div class="book-appointment-btn">
-              <button mat-button type="submit">Marcar sessão</button>
-            </div>
+            @if (appointmentForm.get('date')?.valid && appointmentForm.get('physiotherapistId')?.valid) {
+              @if (allAvailableTimes.length > 0) {
+                <mat-form-field>
+                  <mat-label>Horários disponíveis</mat-label>
+    
+                  <mat-select matInput formControlName="time">
+                    @for (availableTime of allAvailableTimes; track availableTime) {
+                    <mat-option value="{{ availableTime }}">{{ formatTime(availableTime) }}</mat-option>
+                    }
+                  </mat-select>
+                  <mat-error>Horário inválido</mat-error>
+                </mat-form-field>
+              }
+              @else {
+                <mat-form-field>
+                  <mat-label>Horários disponíveis</mat-label>
+    
+                  <mat-select matInput>
+                    <mat-option>
+                      Nenhum horário disponível nessa data
+                    </mat-option>
+                  </mat-select>
+                  <mat-error>Horário inválido</mat-error>
+                </mat-form-field>
+              }
+            }
+
+            @if (appointmentForm.get('date')?.valid && appointmentForm.get('physiotherapistId')?.valid && appointmentForm.get('time')?.valid) {
+              <div class="button">
+                <button mat-button type="submit">Marcar sessão</button>
+              </div>
+            }
           </form>
         }
         @else {
@@ -71,13 +100,13 @@
       </mat-card-header>
 
       <mat-card-content>
-        @if (currentPatient.appointments.length <= 0) {
+        @if (currentPatient && currentPatient.appointments.length <= 0 || !currentPatient) {
           <span>Nenhuma sessão marcada</span>
         }
         @else {
           <div class="appointments">
             @for (appointment of currentPatient.appointments; track appointment) {
-              <div>
+              <div class="date-info">
                 <div>
                   <b>Data/hora: </b>
                   <span> {{formatDate(appointment.time)}}</span>

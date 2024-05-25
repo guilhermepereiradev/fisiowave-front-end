@@ -17,6 +17,10 @@ export class PhysiotherapistsService {
     return this.httpClient.get<Physiotherapist[]>(`${BASE_URL}/physiotherapists`)   
   }
 
+  public getAvailableTime(id: string, date: string): Observable<string[]> {
+    return this.httpClient.get<string[]>(`${BASE_URL}/physiotherapists/${id}`, { params: { 'availableOn': date } });
+  }
+
   public createAppointment(appointment: AppointmentRequest): Observable<AppointmentRequest> {
     return this.httpClient.post<any>(`${BASE_URL}/appointments`, appointment)
   }

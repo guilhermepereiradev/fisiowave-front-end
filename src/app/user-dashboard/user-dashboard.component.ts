@@ -67,6 +67,7 @@ export class UserDashboardComponent implements OnInit {
 
     this.appointmentForm.valueChanges.subscribe(() => {
       let appointmentData = this.appointmentForm.value;
+      this.allAvailableTimes = [];
 
       if (appointmentData.physiotherapistId && appointmentData.date) this.updateAvailableTimes()
     });

@@ -127,7 +127,7 @@ export class CityResponse {
     }
 }
 
-export class AppointmentsResponse {
+export class AppointmentsResumeResponse {
     id: string;
     time: Date;
     physiotherapist: PhysiotherapistResponse;
@@ -136,6 +136,20 @@ export class AppointmentsResponse {
         this.id = id;
         this.time = time;
         this.physiotherapist = physiotherapist;
+    }
+}
+
+export class AppointmentResponse {
+    id: string;
+    time: Date;
+    physiotherapist: PhysiotherapistResponse;
+    patient: PatientResumeResponse
+
+    constructor(id: string, time: Date, physiotherapist: PhysiotherapistResponse, patient: PatientResumeResponse) {
+        this.id = id;
+        this.time = time;
+        this.physiotherapist = physiotherapist;
+        this.patient = patient;
     }
 }
 
@@ -173,10 +187,10 @@ export class PatientResponse {
     createdAt: Date;
     updateAt: Date;
     address: AddressResponse;
-    appointments: AppointmentsResponse[];
+    appointments: AppointmentsResumeResponse[];
 
     constructor(id: string, name: string, phoneNumber: string, birthDate: string, email: string, createdAt: Date,
-        updatedAt: Date, address: AddressResponse, appointments: AppointmentsResponse[]) {
+        updatedAt: Date, address: AddressResponse, appointments: AppointmentsResumeResponse[]) {
         this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber,
@@ -186,5 +200,22 @@ export class PatientResponse {
             this.updateAt = updatedAt,
             this.address = address,
             this.appointments = appointments
+    }
+}
+
+export class PatientResumeResponse {
+    id: string;
+    name: string;
+    phoneNumber: string;
+    birthDate: string;
+    email: string;
+   
+
+    constructor(id: string, name: string, phoneNumber: string, birthDate: string, email: string) {
+        this.id = id;
+        this.name = name;
+        this.phoneNumber = phoneNumber,
+        this.birthDate = birthDate,
+        this.email = email
     }
 }

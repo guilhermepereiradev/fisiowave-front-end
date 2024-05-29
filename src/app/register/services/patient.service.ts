@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable, InjectionToken, PLATFORM_ID } from '@angular/core';
-import { PatientResponse, UserLoginRequest, UserRequest } from '../../models/user-model';
+import { PatientResponse, PatientResumeResponse, UserLoginRequest, UserRequest } from '../../models/user-model';
 import { BASE_URL } from '../../config/constants.config';
 import { Observable } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
@@ -22,5 +22,9 @@ export class PatientService {
 
   public getPatientById(id: string): Observable<PatientResponse> {
     return this.httpClient.get<PatientResponse>(`${BASE_URL}/patients/${id}`)   
+  }
+
+  public gelAllPatients(): Observable<PatientResumeResponse[]> {
+    return this.httpClient.get<PatientResumeResponse[]>(`${BASE_URL}/patients`)   
   }
 }

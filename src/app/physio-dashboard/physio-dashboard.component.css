@@ -1,0 +1,22 @@
+main {
+    width: 95vw;
+    height: 80vh;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+
+    .left-side {
+        width: 28%;
+    }
+
+    .right-side {
+        height: 100%;
+        width: 70%;
+        display: flex;
+        flex-direction: column;
+
+        .appointments-table {
+            margin-bottom: 20px;
+        }
+    }
+}

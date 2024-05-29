@@ -40,8 +40,16 @@ export class LoginComponent {
     this.loginService.login(loginUser).subscribe({
       next: (res: any) => {
         localStorage.setItem("loginToken", res.accessToken)
-        let decodedToken = jwtDecode(res.accessToken)
-        this.router.navigate(["dashboard/", decodedToken.sub]);
+        let decodedToken: any = jwtDecode(res.accessToken)
+
+        if (decodedToken.scope == "ADMIN") {
+
+          this.router.navigate(["physio/dashboard/", decodedToken.sub]);
+        } else {
+
+          this.router.navigate(["dashboard/", decodedToken.sub]);
+        }
+
       },
       error: (res) => {
         const message = res.error.message ?? "Erro no servidor";

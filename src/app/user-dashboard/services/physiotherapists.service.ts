@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BASE_URL } from '../../config/constants.config';
 import { Observable } from 'rxjs';
-import { Physiotherapist, AppointmentRequest } from '../../models/user-model';
+import { Physiotherapist, AppointmentRequest, AppointmentResponse } from '../../models/user-model';
 
 @Injectable({
   providedIn: 'root'
@@ -23,5 +23,13 @@ export class PhysiotherapistsService {
 
   public createAppointment(appointment: AppointmentRequest): Observable<AppointmentRequest> {
     return this.httpClient.post<any>(`${BASE_URL}/appointments`, appointment)
+  }
+
+  public getById(id: string): Observable<Physiotherapist> {
+    return this.httpClient.get<Physiotherapist>(`${BASE_URL}/physiotherapists/${id}`);
+  }
+
+  public getAppointmentsById(id: string): Observable<AppointmentResponse[]> {
+    return this.httpClient.get<AppointmentResponse[]>(`${BASE_URL}/appointments/physiotherapist/${id}`);
   }
 }

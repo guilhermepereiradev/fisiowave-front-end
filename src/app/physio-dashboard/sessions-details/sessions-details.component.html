@@ -1,0 +1,49 @@
+<mat-dialog-content>
+    <p mat-dialog-title>Detalhes da sessão</p>
+
+    <div class="content">
+        <div class="info">
+            <div class="info-title">
+                <mat-icon>person</mat-icon>
+                <b>Paciente:</b>
+            </div>
+            <span>{{ data.selectedAppointment.patient.name }}</span>
+        </div>
+
+        <div class="info">
+            <div class="info-title">
+                <mat-icon>mail</mat-icon>
+                <b>E-mail:</b>
+            </div>
+            <span>{{ data.selectedAppointment.patient.email }}</span>
+        </div>
+
+        <div class="info">
+            <div class="info-title">
+                <mat-icon>smartphone</mat-icon>
+                <b>Celular:</b>
+            </div>
+            <span>{{ formatedPhoneNumber }}</span>
+        </div>
+
+
+        <div class="info">
+            <div class="info-title">
+                <mat-icon>calendar_today</mat-icon>
+                <b>Data/Horário: </b>
+            </div>
+            <span>{{data.selectedAppointment.time | date: 'dd/MM/yyyy HH:mm' }}</span>
+        </div>
+
+        <div class="observation">
+            <mat-form-field>
+                <mat-label>Observações</mat-label>
+                <textarea matInput cdkAutosize></textarea>
+            </mat-form-field>
+        </div>
+
+        <div class="button">
+            <button mat-button>Enviar observações</button>
+        </div>
+    </div>
+</mat-dialog-content>

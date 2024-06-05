@@ -10,6 +10,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { PatientService } from '../register/services/patient.service';
 import { PhysiotherapistsService } from '../user-dashboard/services/physiotherapists.service';
+import { MatDialog } from '@angular/material/dialog';
+import { SessionsDetailsComponent } from './sessions-details/sessions-details.component';
+
+export interface appointmentDetailsDialogData {
+  selectedAppointment: AppointmentResponse
+}
 
 @Component({
   selector: 'app-physio-dashboard',
@@ -38,7 +44,8 @@ export class PhysioDashboardComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private physiotherapistsService: PhysiotherapistsService,
-    private patientService: PatientService
+    private patientService: PatientService,
+    private dialog: MatDialog
   ) { }
 
 
@@ -68,11 +75,24 @@ export class PhysioDashboardComponent implements OnInit {
     this.patientService.gelAllPatients().subscribe({
       next: (res) => {
         this.patients = res;
-        console.log(this.patients)
       },
       error: () => {
 
       }
     });
+  }
+
+  openSessionsDetailsDialog(id: string): void {
+    if (!id) return;
+
+    const selectedAppointment = this.appointments.find(e => e.id === id);
+
+    if (selectedAppointment) {
+      this.dialog.open(SessionsDetailsComponent, {
+        data: <appointmentDetailsDialogData> {
+          selectedAppointment: selectedAppointment
+        }
+      })
+    }
   }
 }

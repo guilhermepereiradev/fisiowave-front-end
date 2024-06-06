@@ -1,0 +1,96 @@
+<mat-dialog-content>
+    <p mat-dialog-title>Detalhes do paciente</p>
+
+    <div class="content">
+        <div class="info-area">
+            <div class="infos">
+                <div class="info">
+                    <div class="info-title">
+                        <mat-icon>person</mat-icon>
+                        <b>Nome:</b>
+                    </div>
+                    <span>{{ data.selectedPatient.name }}</span>
+                </div>
+        
+                <div class="info">
+                    <div class="info-title">
+                        <mat-icon>mail</mat-icon>
+                        <b>Email:</b>
+                    </div>
+                    <span>{{ data.selectedPatient.email }}</span>
+                </div>
+            </div>
+
+            <div class="infos">
+                <div class="info">
+                    <div class="info-title">
+                        <mat-icon>smartphone</mat-icon>
+                        <b>Celular:</b>
+                    </div>
+                    <span>{{ formatedPhoneNumber }}</span>
+                </div>
+
+                <div class="info">
+                    <div class="info-title">
+                        <mat-icon>perm_contact_calendar</mat-icon>
+                        <b>Data Nascimento: </b>
+                    </div>
+                    <span>{{data.selectedPatient.birthDate| date: 'dd/MM/yyyy' }}</span>
+                </div>
+            </div>
+        </div>
+
+        <form class="fields" [formGroup]="anamnesisForm" (ngSubmit)="sendAnamnesis()">
+            <div class="fields-title">
+                <p>Avaliação Inicial</p>
+            </div>
+
+            <div class="side">
+                <mat-form-field>
+                    <mat-label>Gênero</mat-label>
+                    <input matInput type="text" formControlName="gender">
+                </mat-form-field>
+    
+                <mat-form-field>
+                    <mat-label>Profissão</mat-label>
+                    <input matInput type="text" formControlName="profession">
+                </mat-form-field>
+    
+                <mat-form-field>
+                    <mat-label>Peso</mat-label>
+                    <input matInput type="number" formControlName="weight">
+                </mat-form-field>
+    
+                <mat-form-field>
+                    <mat-label>Altura</mat-label>
+                    <input matInput type="number" formControlName="height">
+                </mat-form-field>    
+            </div>
+
+            <div class="grid">
+                <mat-form-field>
+                    <mat-label>Reclamação</mat-label>
+                    <textarea matInput cdkAutosize formControlName="chiefComplaint"></textarea>
+                </mat-form-field>
+    
+                <mat-form-field>
+                    <mat-label>Histórico médico</mat-label>
+                    <textarea matInput cdkAutosize formControlName="pastMedicalHistory"></textarea>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Medicamentos atuais</mat-label>
+                    <textarea matInput cdkAutosize formControlName="currentMedications"></textarea>
+                </mat-form-field>
+    
+                <mat-form-field>
+                    <mat-label>Observação</mat-label>
+                    <textarea matInput cdkAutosize formControlName="observation"></textarea>
+                </mat-form-field>    
+            </div>
+            <div class="button">
+                <button mat-button type="submit" >Enviar avaliação</button>
+            </div>
+        </form>
+    </div>
+</mat-dialog-content>

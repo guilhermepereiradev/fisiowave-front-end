@@ -1,0 +1,76 @@
+[mat-dialog-title] {
+    text-align: center;
+    font-size: 1.5em;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    gap: 13px;
+    font-size: 1.1rem;
+
+    .info-area {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+
+        .infos {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            .info {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 10px;
+        
+                .info-title {
+                    display: flex;
+                    align-items: center;
+                    flex-direction: row;
+                    gap: 5px;
+                }
+            }
+        }
+    }
+
+    .fields {
+        margin-top: 30px;
+
+        .fields-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .side {
+            display: flex;
+            flex-direction: row;
+            gap: 5px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+    }
+    
+    .button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+
+        button {
+            background-color: #1a73e8;
+            color: white;
+            padding: 10px;
+        }
+    }
+}

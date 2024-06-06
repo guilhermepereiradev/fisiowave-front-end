@@ -12,9 +12,14 @@ import { PatientService } from '../register/services/patient.service';
 import { PhysiotherapistsService } from '../user-dashboard/services/physiotherapists.service';
 import { MatDialog } from '@angular/material/dialog';
 import { SessionsDetailsComponent } from './sessions-details/sessions-details.component';
+import { PatientDetailsComponent } from './patient-details/patient-details.component';
 
 export interface appointmentDetailsDialogData {
   selectedAppointment: AppointmentResponse
+}
+
+export interface patientDetailsDialogData {
+  selectedPatient: PatientResumeResponse
 }
 
 @Component({
@@ -91,6 +96,20 @@ export class PhysioDashboardComponent implements OnInit {
       this.dialog.open(SessionsDetailsComponent, {
         data: <appointmentDetailsDialogData> {
           selectedAppointment: selectedAppointment
+        }
+      })
+    }
+  }
+
+  openPatientDetailsDialog(id: string): void {
+    if (!id) return;
+
+    const selectedPatient = this.patients.find(e => e.id === id);
+
+    if (selectedPatient) {
+      this.dialog.open(PatientDetailsComponent, {
+        data: <patientDetailsDialogData> {
+          selectedPatient: selectedPatient
         }
       })
     }

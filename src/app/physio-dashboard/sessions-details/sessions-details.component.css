@@ -1,4 +1,5 @@
 [mat-dialog-title] {
+    text-align: center;
     font-size: 1.5em;
 }
 
@@ -43,6 +44,7 @@
             background-color: #1a73e8;
             color: white;
             padding: 10px;
+            font-size: 1.05em;
         }
     }
 }

@@ -1,11 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatToolbar } from '@angular/material/toolbar'
 import { MatButtonModule } from '@angular/material/button'
 import { Router, RouterModule } from '@angular/router'
 import { MatIconModule } from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
-import { PatientService } from '../register/services/patient.service';
-
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -13,12 +11,21 @@ import { PatientService } from '../register/services/patient.service';
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   constructor(
-    private router: Router,
-    private patientService: PatientService
+    private router: Router
   )
   {}
+
+  mostrarVoltarInicio: boolean = false;
+  
+  ngOnInit(): void {
+    this.router.events.subscribe({
+      next: () => {
+        this.mostrarVoltarInicio = this.router.url !== "/";
+      }
+    });
+  }
 
   logout() {
     if (localStorage.getItem('loginToken')) localStorage.removeItem('loginToken');

@@ -5,23 +5,24 @@
   </div>
 
   <div class="right">
-    @if(hasLoginToken()) {
-    <button mat-icon-button [matMenuTriggerFor]="menu">
-      <mat-icon>account_circle</mat-icon>
-    </button>
-
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="logout()">
-        <mat-icon>exit_to_app</mat-icon>
-        <span>Logout</span>
-      </button>
-    </mat-menu>
-    }
-    @else {
-      <button mat-button routerLink="/">
-        <mat-icon>reply</mat-icon>
-        <span>Voltar ao início</span>
-      </button>
+    @if (this.mostrarVoltarInicio) {
+      @if(hasLoginToken()) {
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>account_circle</mat-icon>
+        </button>
+        
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="logout()">
+            <mat-icon>exit_to_app</mat-icon>
+            <span>Logout</span>
+          </button>
+        </mat-menu>
+      } @else {
+        <button mat-button routerLink="/">
+          <mat-icon>reply</mat-icon>
+          <span>Voltar ao início</span>
+        </button>
+      }
     }
   </div>
 </mat-toolbar>

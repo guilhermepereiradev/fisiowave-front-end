@@ -143,13 +143,15 @@ export class AppointmentResponse {
     id: string;
     time: Date;
     physiotherapist: PhysiotherapistResponse;
-    patient: PatientResumeResponse
+    patient: PatientResumeResponse;
+    observation: string;
 
-    constructor(id: string, time: Date, physiotherapist: PhysiotherapistResponse, patient: PatientResumeResponse) {
+    constructor(id: string, time: Date, physiotherapist: PhysiotherapistResponse, patient: PatientResumeResponse, observation: string) {
         this.id = id;
         this.time = time;
         this.physiotherapist = physiotherapist;
         this.patient = patient;
+        this.observation = observation;
     }
 }
 

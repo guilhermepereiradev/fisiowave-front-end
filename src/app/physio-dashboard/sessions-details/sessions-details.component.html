@@ -7,7 +7,7 @@
                 <mat-icon>person</mat-icon>
                 <b>Paciente:</b>
             </div>
-            <span>{{ data.selectedAppointment.patient.name }}</span>
+            <span>{{ this.appointment?.patient?.name }}</span>
         </div>
 
         <div class="info">
@@ -15,7 +15,7 @@
                 <mat-icon>mail</mat-icon>
                 <b>Email:</b>
             </div>
-            <span>{{ data.selectedAppointment.patient.email }}</span>
+            <span>{{ this.appointment?.patient?.email }}</span>
         </div>
 
         <div class="info">
@@ -32,18 +32,23 @@
                 <mat-icon>calendar_today</mat-icon>
                 <b>Data/Horário: </b>
             </div>
-            <span>{{data.selectedAppointment.time | date: 'dd/MM/yyyy HH:mm' }}</span>
+            <span>{{ this.appointment?.time | date: 'dd/MM/yyyy HH:mm' }}</span>
         </div>
 
-        <div class="observation">
-            <mat-form-field>
-                <mat-label>Observações</mat-label>
-                <textarea matInput cdkAutosize></textarea>
-            </mat-form-field>
-        </div>
+        <form action="" [formGroup]="observationForm" (ngSubmit)="updateObservation()">
+            <div class="observation">
+                <mat-form-field>
+                    <mat-label>Observações</mat-label>
+                    <textarea matInput cdkAutosize formControlName="observation" required></textarea>
+                </mat-form-field>
+            </div>
+    
+            <div class="button">
+                <button mat-button type="">
+                    {{ mostrarBotaoEnviar ? 'Enviar Observação' : 'Editar Observação' }}
+                </button>
+            </div>
+        </form>
 
-        <div class="button">
-            <button mat-button>Enviar observações</button>
-        </div>
     </div>
 </mat-dialog-content>

@@ -14,8 +14,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { SessionsDetailsComponent } from './sessions-details/sessions-details.component';
 import { PatientDetailsComponent } from './patient-details/patient-details.component';
 
-export interface appointmentDetailsDialogData {
-  selectedAppointment: AppointmentResponse
+export interface appointmentData {
+  id: string
 }
 
 export interface patientDetailsDialogData {
@@ -90,15 +90,11 @@ export class PhysioDashboardComponent implements OnInit {
   openSessionsDetailsDialog(id: string): void {
     if (!id) return;
 
-    const selectedAppointment = this.appointments.find(e => e.id === id);
-
-    if (selectedAppointment) {
       this.dialog.open(SessionsDetailsComponent, {
-        data: <appointmentDetailsDialogData> {
-          selectedAppointment: selectedAppointment
+        data: <appointmentData> {
+          id: id
         }
       })
-    }
   }
 
   openPatientDetailsDialog(id: string): void {

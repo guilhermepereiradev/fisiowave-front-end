@@ -190,9 +190,10 @@ export class PatientResponse {
     updateAt: Date;
     address: AddressResponse;
     appointments: AppointmentsResumeResponse[];
+    anamnesis: AnamnesisModel;
 
     constructor(id: string, name: string, phoneNumber: string, birthDate: string, email: string, createdAt: Date,
-        updatedAt: Date, address: AddressResponse, appointments: AppointmentsResumeResponse[]) {
+        updatedAt: Date, address: AddressResponse, appointments: AppointmentsResumeResponse[], anamnesis: AnamnesisModel) {
         this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber,
@@ -202,6 +203,7 @@ export class PatientResponse {
             this.updateAt = updatedAt,
             this.address = address,
             this.appointments = appointments
+        this.anamnesis = anamnesis;
     }
 }
 
@@ -219,5 +221,30 @@ export class PatientResumeResponse {
         this.phoneNumber = phoneNumber,
         this.birthDate = birthDate,
         this.email = email
+    }
+}
+
+
+export class AnamnesisModel {
+    id?: string;
+    gender: string;
+    profession: string;
+    weight: number;
+    height: number;
+    chiefComplaint: string;
+    pastMedicalHistory: string;
+    currentMedications: string;
+    observation: string;
+   
+
+    constructor(gender: string, profession: string, weight: number, height: number, chiefComplaint: string, pastMedicalHistory: string, currentMedications: string, observation: string) {        
+        this.gender = gender;
+        this.profession = profession,
+        this.weight = weight,
+        this.height = height,
+        this.chiefComplaint = chiefComplaint,
+        this.pastMedicalHistory = pastMedicalHistory,
+        this.currentMedications = currentMedications,
+        this.observation = observation
     }
 }

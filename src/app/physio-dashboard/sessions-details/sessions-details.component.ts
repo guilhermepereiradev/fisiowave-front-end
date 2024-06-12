@@ -83,7 +83,6 @@ export class SessionsDetailsComponent implements OnInit{
     });
   }
 
-
   getAppointment() {
     this.appointmentService.getAppointmentById(this.appointmentData.id).subscribe({
       next: (res) => {

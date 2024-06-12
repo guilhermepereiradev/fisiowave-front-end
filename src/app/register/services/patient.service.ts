@@ -1,10 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable, InjectionToken, PLATFORM_ID } from '@angular/core';
-import { PatientResponse, PatientResumeResponse, UserLoginRequest, UserRequest } from '../../models/user-model';
+import { Injectable } from '@angular/core';
+import { AnamnesisModel, PatientResponse, PatientResumeResponse, UserLoginRequest, UserRequest } from '../../models/user-model';
 import { BASE_URL } from '../../config/constants.config';
 import { Observable } from 'rxjs';
-import { isPlatformBrowser } from '@angular/common';
-import { jwtDecode } from "jwt-decode";
 
 @Injectable({
   providedIn: 'root'
@@ -26,5 +24,9 @@ export class PatientService {
 
   public gelAllPatients(): Observable<PatientResumeResponse[]> {
     return this.httpClient.get<PatientResumeResponse[]>(`${BASE_URL}/patients`)   
+  }
+
+  public sendAnamnesis(id: string, anamnesis: AnamnesisModel): Observable<PatientResponse> {
+    return this.httpClient.put<PatientResponse>(`${BASE_URL}/patients/${id}/anamnesis`, anamnesis);
   }
 }

@@ -19,7 +19,7 @@ export interface appointmentData {
 }
 
 export interface patientDetailsDialogData {
-  selectedPatient: PatientResumeResponse
+  id: string
 }
 
 @Component({
@@ -100,14 +100,10 @@ export class PhysioDashboardComponent implements OnInit {
   openPatientDetailsDialog(id: string): void {
     if (!id) return;
 
-    const selectedPatient = this.patients.find(e => e.id === id);
-
-    if (selectedPatient) {
-      this.dialog.open(PatientDetailsComponent, {
-        data: <patientDetailsDialogData> {
-          selectedPatient: selectedPatient
-        }
-      })
-    }
+    this.dialog.open(PatientDetailsComponent, {
+      data: <patientDetailsDialogData>{
+        id: id
+      }
+    })
   }
 }

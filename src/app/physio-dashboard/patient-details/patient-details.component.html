@@ -9,7 +9,7 @@
                         <mat-icon>person</mat-icon>
                         <b>Nome:</b>
                     </div>
-                    <span>{{ data.selectedPatient.name }}</span>
+                    <span>{{ patient?.name }}</span>
                 </div>
         
                 <div class="info">
@@ -17,7 +17,7 @@
                         <mat-icon>mail</mat-icon>
                         <b>Email:</b>
                     </div>
-                    <span>{{ data.selectedPatient.email }}</span>
+                    <span>{{ patient?.email }}</span>
                 </div>
             </div>
 
@@ -35,12 +35,12 @@
                         <mat-icon>perm_contact_calendar</mat-icon>
                         <b>Data Nascimento: </b>
                     </div>
-                    <span>{{data.selectedPatient.birthDate| date: 'dd/MM/yyyy' }}</span>
+                    <span>{{patient?.birthDate | date: 'dd/MM/yyyy' }}</span>
                 </div>
             </div>
         </div>
 
-        <form class="fields" [formGroup]="anamnesisForm" (ngSubmit)="sendAnamnesis()">
+        <form class="fields" [formGroup]="anamnesisForm" (ngSubmit)="updateAnamnesis()">
             <div class="fields-title">
                 <p>Avaliação Inicial</p>
             </div>
@@ -48,7 +48,11 @@
             <div class="side">
                 <mat-form-field>
                     <mat-label>Gênero</mat-label>
-                    <input matInput type="text" formControlName="gender">
+                    <mat-select matInput type="text" formControlName="gender">
+                        <mat-option value="MALE">Masculino</mat-option>
+                        <mat-option value="FEMALE">Feminino</mat-option>
+                        <mat-option value="OTHER">Outro</mat-option>
+                    </mat-select>
                 </mat-form-field>
     
                 <mat-form-field>
@@ -89,7 +93,13 @@
                 </mat-form-field>    
             </div>
             <div class="button">
-                <button mat-button type="submit" >Enviar avaliação</button>
+                <button mat-button type="submit">
+                    @if (mostrarBotaoEnviar) {
+                        Enviar avaliação
+                    } @else {
+                        Editar avaliação
+                    }
+                </button>
             </div>
         </form>
     </div>

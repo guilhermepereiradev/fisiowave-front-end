@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { PatientService } from '../register/services/patient.service';
 import { PatientResponse, Physiotherapist, PhysiotherapistResponse, AppointmentRequest, UserRequest } from '../models/user-model';
 import { ActivatedRoute } from '@angular/router';
 import { PhysiotherapistsService } from './services/physiotherapists.service';
 import { MatSelectModule } from '@angular/material/select';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormGroupDirective, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { RequestDialogComponent } from '../register/request-dialog/request-dialog.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -51,8 +51,10 @@ export class UserDashboardComponent implements OnInit {
     private physiotherapistsService: PhysiotherapistsService,
     private fb: FormBuilder,
     private dialog: MatDialog,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
   ) { }
+
+  @ViewChild(FormGroupDirective) formGroupDirective: FormGroupDirective | undefined;
 
   ngOnInit(): void {
     this.updateCurrentPatient();
@@ -108,7 +110,8 @@ export class UserDashboardComponent implements OnInit {
           }
         });
 
-        this.updateCurrentPatient();
+        this.appointmentForm.reset();
+        if(this.formGroupDirective) this.formGroupDirective.resetForm();
       },
       error: (res) => {
         const message = res.error.message ?? "Erro no servidor";

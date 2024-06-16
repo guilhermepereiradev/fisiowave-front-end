@@ -112,6 +112,7 @@ export class UserDashboardComponent implements OnInit {
 
         this.appointmentForm.reset();
         if(this.formGroupDirective) this.formGroupDirective.resetForm();
+        this.updateCurrentPatient();
       },
       error: (res) => {
         const message = res.error.message ?? "Erro no servidor";

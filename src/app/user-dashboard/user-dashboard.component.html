@@ -8,58 +8,87 @@
       <mat-card-content>
         <div class="user-info-list">
           <div class="user-info">
-            <b>Nome: </b>
+            <div class="info-title">
+                <mat-icon>person</mat-icon>
+                <b>Nome:</b>
+            </div>
             <span>{{currentPatient?.name}}</span>
           </div>
 
           <div class="user-info">
-            <b>Email: </b>
+            <div class="info-title">
+                <mat-icon>mail</mat-icon>
+                <b>Email:</b>
+            </div>
             <span>{{currentPatient?.email}}</span>
           </div>
 
           <div class="user-info">
-            <b>Telefone: </b>
+            <div class="info-title">
+                <mat-icon>smartphone</mat-icon>
+                <b>Telefone:</b>
+            </div>
             <span>{{formatedPhoneNumber}}</span>
           </div>
 
-          @if(currentPatient?.address?.city?.state) {
+          <br>
+
+          @if(currentPatient?.address?.city?.state?.name) {
             <div class="user-info">
-              <b>Estado: </b>
+              <div class="info-title">
+                  <mat-icon>location_on</mat-icon>
+                  <b>Estado:</b>
+              </div>
               <span>{{currentPatient?.address?.city?.state?.name}}</span>
             </div>
           }
 
-          @if(currentPatient?.address?.city) {
+          @if(currentPatient?.address?.city?.name) {
             <div class="user-info">
-              <b>Cidade: </b>
+              <div class="info-title">
+                  <mat-icon>location_on</mat-icon>
+                  <b>Cidade:</b>
+              </div>
               <span>{{currentPatient?.address?.city?.name}}</span>
             </div>
           }
 
           @if(currentPatient?.address?.neighborhood) {
             <div class="user-info">
-              <b>Bairro: </b>
+              <div class="info-title">
+                  <mat-icon>location_on</mat-icon>
+                  <b>Bairro:</b>
+              </div>
               <span>{{currentPatient?.address?.neighborhood}}</span>
-            </div>
-          }
-
-          @if(currentPatient?.address?.number) {
-            <div class="user-info">
-              <b>Número da casa: </b>
-              <span>{{currentPatient?.address?.number}}</span>
             </div>
           }
 
           @if(currentPatient?.address?.street) {
             <div class="user-info">
-              <b>Rua: </b>
+              <div class="info-title">
+                  <mat-icon>location_on</mat-icon>
+                  <b>Rua:</b>
+              </div>
               <span>{{currentPatient?.address?.street}}</span>
+            </div>
+          }
+
+          @if(currentPatient?.address?.number) {
+            <div class="user-info">
+              <div class="info-title">
+                  <mat-icon>home</mat-icon>
+                  <b>Número da casa:</b>
+              </div>
+              <span>{{currentPatient?.address?.number}}</span>
             </div>
           }
 
           @if(currentPatient?.address?.complement) {
             <div class="user-info">
-              <b>Complemento: </b>
+              <div class="info-title">
+                  <mat-icon>abc</mat-icon>
+                  <b>Complemento:</b>
+              </div>
               <span>{{currentPatient?.address?.complement}}</span>
             </div>
           }

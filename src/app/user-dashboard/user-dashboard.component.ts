@@ -13,11 +13,12 @@ import { MatInput } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule, DatePipe } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-user-dashboard',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatSelectModule, ReactiveFormsModule, MatDatepickerModule, MatInput, MatButtonModule, MatTableModule],
+  imports: [CommonModule, MatCardModule, MatSelectModule, ReactiveFormsModule, MatDatepickerModule, MatInput, MatButtonModule, MatTableModule, MatIconModule],
   templateUrl: './user-dashboard.component.html',
   styleUrl: './user-dashboard.component.css',
   providers: [DatePipe]

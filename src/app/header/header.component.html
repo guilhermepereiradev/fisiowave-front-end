@@ -5,7 +5,6 @@
   </div>
 
   <div class="right">
-    @if (this.mostrarVoltarInicio) {
       @if(hasLoginToken()) {
         <button mat-icon-button [matMenuTriggerFor]="menu">
           <mat-icon>account_circle</mat-icon>
@@ -18,11 +17,12 @@
           </button>
         </mat-menu>
       } @else {
-        <button mat-button routerLink="/">
-          <mat-icon>reply</mat-icon>
-          <span>Voltar ao início</span>
-        </button>
+        @if (this.mostrarVoltarInicio) {
+          <button mat-button routerLink="/">
+            <mat-icon>reply</mat-icon>
+            <span>Voltar ao início</span>
+          </button>
+        }
       }
-    }
   </div>
 </mat-toolbar>

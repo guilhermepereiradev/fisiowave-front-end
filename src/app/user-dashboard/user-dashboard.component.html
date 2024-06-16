@@ -154,7 +154,14 @@
             @if (appointmentForm.get('date')?.valid && appointmentForm.get('physiotherapistId')?.valid &&
             appointmentForm.get('time')?.valid) {
             <div class="button">
-              <button mat-button type="submit">Marcar sessão</button>
+              <button [ngClass]="{ loading }" [disabled]="loading" mat-button type="submit">
+                @if (loading) {
+                  <mat-spinner class="spinner"></mat-spinner>
+                }
+                @else {
+                  Marcar sessão
+                }
+              </button>
             </div>
             }
           </div>

@@ -14,11 +14,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { CommonModule, DatePipe } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-user-dashboard',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatSelectModule, ReactiveFormsModule, MatDatepickerModule, MatInput, MatButtonModule, MatTableModule, MatIconModule],
+  imports: [CommonModule, MatCardModule, MatSelectModule, ReactiveFormsModule, MatDatepickerModule, MatInput, MatButtonModule,
+    MatTableModule, MatIconModule, MatProgressSpinnerModule],
   templateUrl: './user-dashboard.component.html',
   styleUrl: './user-dashboard.component.css',
   providers: [DatePipe]
@@ -27,6 +29,7 @@ export class UserDashboardComponent implements OnInit {
   currentPatient?: PatientResponse
   allPhysiotherapists?: Physiotherapist[];
   allAvailableTimes: string[] = [];
+  loading = false;
 
   appointmentForm: FormGroup = this.fb.group({
     date: ["", Validators.required],
@@ -104,6 +107,8 @@ export class UserDashboardComponent implements OnInit {
 
   bookAppointment(): void {
     if (!this.currentPatient) return;
+    
+    this.loading = true;
 
     let appointmentData = this.appointmentForm.value;
     let appointmentDate = new Date(appointmentData.time);
@@ -121,6 +126,7 @@ export class UserDashboardComponent implements OnInit {
         this.appointmentForm.reset();
         if(this.formGroupDirective) this.formGroupDirective.resetForm();
         this.updateCurrentPatient();
+        this.loading = false;
       },
       error: (res) => {
         const message = res.error.message ?? "Erro no servidor";

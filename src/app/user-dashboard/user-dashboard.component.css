@@ -72,6 +72,16 @@
                     align-items: center;
                     width: 100%;
                     margin-top: 10px;
+
+                    .loading {
+                        background-color: #acacac;
+                        opacity: 0.5;
+                    }
+
+                    .spinner {
+                        width: 30px !important;
+                        height: 30px !important;
+                    }
     
                     button {
                         font-size: 1.3em;

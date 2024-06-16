@@ -21,9 +21,6 @@ describe('template spec', () => {
     cy.get('.mdc-button__label').click()
     cy.get('.content > span').contains('Usuário registrado com sucesso!')
     cy.get('body').click()
-
-
-
   })
   it('Cadastro com email ja existente', () => {
     cy.visit('http://localhost:4200')
@@ -127,8 +124,7 @@ describe('template spec', () => {
     cy.get('#mat-option-0').click()
     cy.get('.mat-mdc-dialog-component-host > .content').type('Não é possível marcar consultas aos fins de semana.')
   })
-
-
+ 
   it('Agendamento de sessão em datas que ja passaram', () => {
     cy.visit('http://localhost:4200')
     cy.get(':nth-child(2) > .mat-mdc-card-content > .mdc-button > .mdc-button__label > span').click()
@@ -140,5 +136,37 @@ describe('template spec', () => {
     cy.get('#mat-option-0').click()
     cy.get('.content > span').contains('Data da consulta deve ser uma data futura')
   })
-
-})
+  it('Adicionando detahes da sessão', () => {
+    cy.viewport(1920,1080)
+    cy.visit('http://localhost:4200')
+    cy.get(':nth-child(2) > .mat-mdc-card-content > .mdc-button > .mdc-button__label > span').click()
+    cy.get('#mat-input-0').type('john.physio@email.com')
+    cy.get('#mat-input-1').type('12345678')
+    cy.get('.login > .mdc-button > .mdc-button__label').click()
+    cy.get('.appointments-table > .mat-mdc-table > .mdc-data-table__content > :nth-child(1) > .cdk-column-view > .mdc-fab > .mat-mdc-button-touch-target').click()
+    cy.get('.mat-mdc-text-field-wrapper').type('Durante a sessão, foram realizados procedimentos específicos, incluindo alongamento dos isquiotibiais, liberação miofascial da região lombar e exercícios de fortalecimento do core. A duração da sessão foi de 50 minutos. João relatou alívio temporário da dor após a liberação miofascial, embora tenha sentido um leve aumento da dor após os exercícios de fortalecimento, que diminuiu com o repouso. O paciente foi instruído a realizar exercícios de alongamento diários e a evitar levantar pesos por uma semana. Ele demonstrou boa aderência ao tratamento e compreensão das instruções fornecidas')
+    cy.get('.button').click()
+    cy.get('.content > span').contains('Observação atualizada com sucesso')
+  })
+  it('Adicionando detahes do paciente', () => {
+    cy.viewport(1920,1080)
+    cy.visit('http://localhost:4200')
+    cy.get(':nth-child(2) > .mat-mdc-card-content > .mdc-button > .mdc-button__label > span').click()
+    cy.get('#mat-input-0').type('john.physio@email.com')
+    cy.get('#mat-input-1').type('12345678')
+    cy.get('.login > .mdc-button > .mdc-button__label').click()
+    cy.get(':nth-child(2) > .cdk-column-view > .mdc-fab > .mat-mdc-button-touch-target').click()
+    cy.get('.mat-mdc-select-placeholder').click()
+    cy.get('#mat-option-0').click()
+    cy.get('#mat-input-2').type("Pedreiro")
+    cy.get('#mat-input-3').type("70")
+    cy.get('#mat-input-4').type("186")
+    cy.get('#mat-input-5').type("Dor lombar constante há 2 semanas, que piora ao levantar pesos e após longos períodos em pé.")
+    cy.get('#mat-input-6').type("Hérnia de disco diagnosticada em 2020\nCirurgia no joelho esquerdo em 2018\nHistórico de hipertensão controlada com medicação")
+    cy.get('#mat-input-7').type("Anti-inflamatório ibuprofeno 400 mg, conforme necessário.\nAnti-hipertensivo Losartana 50 mg, uma vez ao dia.\nRelaxante muscular Cyclobenzaprina 10 mg, conforme necessário.")
+    cy.get('#mat-input-8').type("O paciente, João da Silva, tem mostrado boa aderência ao plano de tratamento, realizando os exercícios recomendados em casa. Ele relatou uma melhora significativa na mobilidade da coluna lombar, com redução da dor de 7/10 para 4/10 após três sessões. No entanto, mencionou que o estresse no trabalho, onde atua como pedreiro, pode estar contribuindo para a persistência da tensão muscular. Durante a sessão, ele não apresentou desconforto com a liberação miofascial, mas relatou um leve aumento da dor após os exercícios de fortalecimento, que diminuiu com o repouso. João expressou interesse em complementar o tratamento com yoga, e foi incentivado a fazê-lo. Está planejada a introdução de exercícios de resistência na próxima sessão para continuar fortalecendo a musculatura lombar, e será considerado um encaminhamento para avaliação de um ortopedista caso a dor não melhore significativamente nas próximas duas semanas.")
+    cy.get('.button').click()
+    cy.get('.content > span').contains('Avaliação cadastrada com sucesso.')
+  })
+  
+  })

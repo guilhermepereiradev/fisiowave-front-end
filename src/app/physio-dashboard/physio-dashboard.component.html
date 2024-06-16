@@ -6,8 +6,23 @@
                 <mat-card-title>Meus dados</mat-card-title>
             </mat-card-header>
             <mat-card-content>
-                <p><b>Nome:</b> {{ physio?.name }}</p>
-                <p><b>Email:</b> {{ physio?.email }}</p>
+                <div class="user-info-list">
+                  <div class="user-info">
+                    <div class="info-title">
+                        <mat-icon>person</mat-icon>
+                        <b>Nome:</b>
+                    </div>
+                    <span>{{ physio?.name }}</span>
+                  </div>
+        
+                  <div class="user-info">
+                    <div class="info-title">
+                        <mat-icon>mail</mat-icon>
+                        <b>Email:</b>
+                    </div>
+                    <span>{{ physio?.email }}</span>
+                  </div>
+                </div>
             </mat-card-content>
         </mat-card>
     </section>

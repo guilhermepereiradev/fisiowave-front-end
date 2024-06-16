@@ -21,6 +21,48 @@
             <b>Telefone: </b>
             <span>{{formatedPhoneNumber}}</span>
           </div>
+
+          @if(currentPatient?.address?.city?.state) {
+            <div class="user-info">
+              <b>Estado: </b>
+              <span>{{currentPatient?.address?.city?.state?.name}}</span>
+            </div>
+          }
+
+          @if(currentPatient?.address?.city) {
+            <div class="user-info">
+              <b>Cidade: </b>
+              <span>{{currentPatient?.address?.city?.name}}</span>
+            </div>
+          }
+
+          @if(currentPatient?.address?.neighborhood) {
+            <div class="user-info">
+              <b>Bairro: </b>
+              <span>{{currentPatient?.address?.neighborhood}}</span>
+            </div>
+          }
+
+          @if(currentPatient?.address?.number) {
+            <div class="user-info">
+              <b>Número da casa: </b>
+              <span>{{currentPatient?.address?.number}}</span>
+            </div>
+          }
+
+          @if(currentPatient?.address?.street) {
+            <div class="user-info">
+              <b>Rua: </b>
+              <span>{{currentPatient?.address?.street}}</span>
+            </div>
+          }
+
+          @if(currentPatient?.address?.complement) {
+            <div class="user-info">
+              <b>Complemento: </b>
+              <span>{{currentPatient?.address?.complement}}</span>
+            </div>
+          }
         </div>
       </mat-card-content>
     </mat-card>
@@ -34,7 +76,8 @@
 
       <mat-card-content>
         @if (allPhysiotherapists) {
-          <form class="fields" [formGroup]="appointmentForm" (ngSubmit)="bookAppointment()">
+        <form class="forms" [formGroup]="appointmentForm" (ngSubmit)="bookAppointment()">
+          <div class="fields">
             <mat-form-field>
               <mat-label>Data</mat-label>
               <input matInput [matDatepicker]="picker" formControlName="date">
@@ -52,75 +95,76 @@
               </mat-select>
               <mat-error>Fisioterapeuta inválido</mat-error>
             </mat-form-field>
-
-            @if (appointmentForm.get('date')?.valid && appointmentForm.get('physiotherapistId')?.valid) {
-              @if (allAvailableTimes.length > 0) {
-                <mat-form-field>
-                  <mat-label>Horários disponíveis</mat-label>
-    
-                  <mat-select matInput formControlName="time">
-                    @for (availableTime of allAvailableTimes; track availableTime) {
-                    <mat-option value="{{ availableTime }}">{{ formatTime(availableTime) }}</mat-option>
-                    }
-                  </mat-select>
-                  <mat-error>Horário inválido</mat-error>
-                </mat-form-field>
-              }
-              @else {
-                <mat-form-field>
-                  <mat-label>Horários disponíveis</mat-label>
-    
-                  <mat-select matInput>
-                    <mat-option>
-                      Nenhum horário disponível nessa data
-                    </mat-option>
-                  </mat-select>
-                  <mat-error>Horário inválido</mat-error>
-                </mat-form-field>
-              }
+  
+            @if (allAvailableTimes.length > 0) {
+            <mat-form-field>
+              <mat-label>Horários disponíveis</mat-label>
+  
+              <mat-select matInput formControlName="time">
+                @for (availableTime of allAvailableTimes; track availableTime) {
+                <mat-option value="{{ availableTime }}">{{ formatTime(availableTime) }}</mat-option>
+                }
+              </mat-select>
+              <mat-error>Horário inválido</mat-error>
+            </mat-form-field>
             }
+            @else {
+              <mat-form-field>
+                <mat-label>Horários disponíveis</mat-label>
+  
+                <mat-select matInput>
+                  <mat-option>
+                    Nenhum horário disponível nessa data
+                  </mat-option>
+                </mat-select>
+                <mat-error>Horário inválido</mat-error>
+              </mat-form-field>
+              }
+          </div>
 
-            @if (appointmentForm.get('date')?.valid && appointmentForm.get('physiotherapistId')?.valid && appointmentForm.get('time')?.valid) {
-              <div class="button">
-                <button mat-button type="submit">Marcar sessão</button>
-              </div>
+          <div>
+            @if (appointmentForm.get('date')?.valid && appointmentForm.get('physiotherapistId')?.valid &&
+            appointmentForm.get('time')?.valid) {
+            <div class="button">
+              <button mat-button type="submit">Marcar sessão</button>
+            </div>
             }
-          </form>
+          </div>
+        </form>
         }
         @else {
-          <span>Nenhum fisioterapeuta disponível para marcar sessão.</span>
+        <span>Nenhum fisioterapeuta disponível para marcar sessão.</span>
         }
-        
+
       </mat-card-content>
     </mat-card>
 
-    <mat-card>
+    <mat-card class="appointments-table">
       <mat-card-header>
-        <mat-card-title>Sessões marcadas</mat-card-title>
+        <mat-card-title>Sessões Marcadas</mat-card-title>
       </mat-card-header>
 
-      <mat-card-content>
-        @if (currentPatient && currentPatient.appointments.length <= 0 || !currentPatient) {
-          <span>Nenhuma sessão marcada</span>
-        }
-        @else {
-          <div class="appointments">
-            @for (appointment of currentPatient.appointments; track appointment) {
-              <div class="date-info">
-                <div>
-                  <b>Data/hora: </b>
-                  <span> {{formatDate(appointment.time)}}</span>
-                </div>
+      @if (appointments.length > 0) {
+        <table class="table" mat-table [dataSource]="appointments" class="mat-elevation-z8">
+          <ng-container matColumnDef="time">
+            <th mat-header-cell *matHeaderCellDef> Horário </th>
+            <td mat-cell *matCellDef="let appointment"> {{ appointment.time | date : 'dd/MM/yyyy HH:mm' }} </td>
+          </ng-container>
   
-                <div>
-                  <b>Fisioterapeuta: </b>
-                  <span> {{appointment.physiotherapist.name}}</span>
-                </div>
-              </div>
-            }
-          </div>
-        }
-      </mat-card-content>
+          <ng-container matColumnDef="physiotherapist">
+            <th mat-header-cell *matHeaderCellDef> Fisioterapeuta </th>
+            <td mat-cell *matCellDef="let appointment"> {{ appointment.physiotherapist.name }} </td>
+          </ng-container>
+  
+          <tr mat-header-row *matHeaderRowDef="appointmentsColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: appointmentsColumns;"></tr>
+        </table>
+      }
+      @else {
+        <div class="no-session">
+          <p>Nenhuma sessão encontrada</p>
+        </div>
+      }
     </mat-card>
   </div>
 </div>

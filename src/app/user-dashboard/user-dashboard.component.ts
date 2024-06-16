@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { PatientService } from '../register/services/patient.service';
-import { PatientResponse, Physiotherapist, PhysiotherapistResponse, AppointmentRequest, UserRequest } from '../models/user-model';
+import { PatientResponse, Physiotherapist, PhysiotherapistResponse, AppointmentRequest, UserRequest, AppointmentsResumeResponse } from '../models/user-model';
 import { ActivatedRoute } from '@angular/router';
 import { PhysiotherapistsService } from './services/physiotherapists.service';
 import { MatSelectModule } from '@angular/material/select';
@@ -11,12 +11,13 @@ import { RequestDialogComponent } from '../register/request-dialog/request-dialo
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInput } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
+import { MatTableModule } from '@angular/material/table';
 
 @Component({
   selector: 'app-user-dashboard',
   standalone: true,
-  imports: [MatCardModule, MatSelectModule, ReactiveFormsModule, MatDatepickerModule, MatInput, MatButtonModule],
+  imports: [CommonModule, MatCardModule, MatSelectModule, ReactiveFormsModule, MatDatepickerModule, MatInput, MatButtonModule, MatTableModule],
   templateUrl: './user-dashboard.component.html',
   styleUrl: './user-dashboard.component.css',
   providers: [DatePipe]
@@ -44,6 +45,12 @@ export class UserDashboardComponent implements OnInit {
 
     return "";
   }
+
+  get appointments(): AppointmentsResumeResponse[] {
+    return this.currentPatient?.appointments ?? [];
+  }
+
+  appointmentsColumns: string[] = ['time', 'physiotherapist'];
 
   constructor(
     private patientService: PatientService,
@@ -138,14 +145,11 @@ export class UserDashboardComponent implements OnInit {
     );
   }
 
-  formatDate(date: Date): string {
-    return this.datePipe.transform(date, 'dd/MM/yyyy HH:mm') || '';
-  }
-
   formatTimeRequestDate(date: Date): string {
     return this.datePipe.transform(date, 'yyyy-MM-dd') || '';
   }
 
+  
   formatTime(dateString: string): string {
     const date = new Date(dateString);
 

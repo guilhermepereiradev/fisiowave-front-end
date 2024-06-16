@@ -1,8 +1,8 @@
 .content {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    gap: 10px;
+    justify-content: center;
+    gap: 100px;
 
     span {
         font-size: 1.1em;
@@ -52,18 +52,21 @@
         display: flex;
         flex-direction: column;
         gap: 50px;
-        max-width: 500px;
         
         .book-appointment {
             mat-card-content {
                 display: flex;
-                flex-direction: column;
-                align-items: center;
+                flex-direction: row;
 
-                .fields {
+                .forms {
                     display: flex;
                     flex-direction: column;
-                    gap: 5px;
+
+                    .fields {
+                        display: flex;
+                        flex-direction: row;
+                        gap: 15px;
+                    }
                 }
 
                 .button {
@@ -83,16 +86,23 @@
             }
         }
 
-        .appointments {
+        .appointments-table {
             display: flex;
             flex-direction: column;
-            gap: 10px;
 
-            .date-info {
-                padding: 5px;
-                border-radius: 5px;
-                background-color: #cccccc;
+            .no-session {
+                padding: 4px;
+            }
+
+            .mat-mdc-card-header {
+                margin-bottom: 0;
             }
         }
     }
+}
+
+
+table {
+    height: 50px;
+    overflow-y: auto;
 }
